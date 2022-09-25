@@ -4,10 +4,11 @@ import 'dart:convert';
 import 'package:velocity_x/velocity_x.dart';
 
 class CatalogList extends StatelessWidget {
-  final String route;
   final double size;
-  const CatalogList({Key? key, this.size = 14, required this.route})
-      : super(key: key);
+  const CatalogList({
+    Key? key,
+    this.size = 14,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -18,9 +19,7 @@ class CatalogList extends StatelessWidget {
           final catalog = CatalogModel.items[index];
           // ignore: missing_required_param
           return InkWell(
-              onTap: () {
-                Navigator.pushNamed(context, route);
-              },
+              onTap: () {},
               child: CatalogItem(
                 catalog: catalog,
                 color: Colors.white,
@@ -64,7 +63,9 @@ class CatalogItem extends StatelessWidget {
                   width: 10,
                 ),
                 ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pushNamed(context, catalog.nextPager);
+                  },
                   style: ButtonStyle(
                       backgroundColor:
                           MaterialStateProperty.all(context.theme.buttonColor),
@@ -105,6 +106,7 @@ class CatalogModel {
         id: 1,
         name: "!! Internet Connection",
         desc: "Connection to the internet failed",
+        nextPager: "/honmepage",
         image:
             "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/Simple_Alert.svg/1200px-Simple_Alert.svg.png")
   ];
@@ -118,13 +120,14 @@ class Item {
   final int id;
   final String name;
   final String desc;
-
+  final String nextPager;
   final String image;
 
   Item({
     required this.id,
     required this.name,
     required this.desc,
+    required this.nextPager,
     required this.image,
   });
 
@@ -132,12 +135,14 @@ class Item {
     int? id,
     String? name,
     String? desc,
+    String? nextPager,
     String? image,
   }) {
     return Item(
       id: id ?? this.id,
       name: name ?? this.name,
       desc: desc ?? this.desc,
+      nextPager: nextPager ?? this.nextPager,
       image: image ?? this.image,
     );
   }
@@ -147,6 +152,7 @@ class Item {
       'id': id,
       'name': name,
       'desc': desc,
+      'nextPager': nextPager,
       'image': image,
     };
   }
@@ -156,6 +162,7 @@ class Item {
       id: map['id'] as int,
       name: map['name'] as String,
       desc: map['desc'] as String,
+      nextPager: map['nextPager'] as String,
       image: map['image'] as String,
     );
   }
@@ -167,7 +174,7 @@ class Item {
 
   @override
   String toString() {
-    return 'Item(id: $id, name: $name, desc: $desc, image: $image)';
+    return 'Item(id: $id, name: $name, desc: $desc, nestPager: $nextPager, image: $image)';
   }
 
   @override
@@ -178,11 +185,16 @@ class Item {
         other.id == id &&
         other.name == name &&
         other.desc == desc &&
+        other.nextPager == nextPager &&
         other.image == image;
   }
 
   @override
   int get hashCode {
-    return id.hashCode ^ name.hashCode ^ desc.hashCode ^ image.hashCode;
+    return id.hashCode ^
+        name.hashCode ^
+        desc.hashCode ^
+        nextPager.hashCode ^
+        image.hashCode;
   }
 }
