@@ -10,9 +10,10 @@ For general information about developing packages, see the Dart guide for
 and the Flutter guide for
 [developing packages and plugins](https://flutter.dev/developing-packages). 
 -->
-![fancylistLogo](https://user-images.githubusercontent.com/90024312/192206345-ecf67f4c-3e9a-469d-b952-74656dfaca18.png)
+![finalLogo(fancylist)](https://user-images.githubusercontent.com/90024312/192208076-7fd887e6-711a-4b8c-9de1-c91833eca844.png)
 
-# FancyList 
+
+# FancyList : Custom Modern Look ListView
 
 Fancy List is a Custom and Modern look ListView in flutter. It is ver easy to implent with JSON and its functionaly can be changed with JSON file
 
